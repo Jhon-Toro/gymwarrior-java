@@ -1,0 +1,76 @@
+create table miembro(
+    id_miembro int NOT NULL AUTO_INCREMENT,
+    nombres varchar(100) NOT NULL,
+    apellidos varchar(100) NOT NULL,
+    correo varchar(255) NOT NULL,
+    telefono varchar(11) NOT NULL,
+    contraseña varchar(255) NOT NULL,
+    peso varchar(30) NOT NULL,
+    altura varchar(100) NOT NULL,
+    membresia varchar(100) NOT NULL,
+    CONSTRAINT pk_miembro PRIMARY KEY (id_miembro)
+);
+
+create table entrenador(
+    id_entrenador int NOT NULL AUTO_INCREMENT,
+    nombres varchar(100) NOT NULL,
+    apellios varchar(100) NOT NULL,
+    correo varchar(255) NOT NULL,
+    telefono varchar(11) NOT NULL,
+    contraseña varchar(255) NOT NULL,
+    peso varchar(30) NOT NULL,
+    altura varchar(100) NOT NULL,
+    especialidad varchar(100) NOT NULL,
+    CONSTRAINT pk_entrenador PRIMARY KEY (id_entrenador)
+);
+
+create table categoria(
+	id_categoria int NOT NULL AUTO_INCREMENT,
+    nombreCategoria varchar(255) NOT NULL,
+    descripcionCategoria varchar(255) NOT NULL,
+    CONSTRAINT pk_categoria PRIMARY KEY (id_categoria)
+);
+
+create table producto(
+	id_producto int NOT NULL AUTO_INCREMENT,
+    nombreProducto VARCHAR(255) NOT NULL,
+    costo DECIMAL(10,2) NOT NULL,
+    margenGanancia DECIMAL(10,2) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    cantidad INT NOT NULL,
+    id_categoria int,
+    CONSTRAINT pk_producto PRIMARY KEY (id_producto),
+    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria)
+    REFERENCES categoria (id_categoria)
+);
+
+create table compra(
+	id_compra int NOT NULL AUTO_INCREMENT,
+    cantidad int NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    id_miembro int,
+    id_producto int,
+    CONSTRAINT pk_compra PRIMARY KEY (id_compra),
+    CONSTRAINT fk_miembro FOREIGN KEY (id_miembro) REFERENCES miembro (id_miembro),
+    CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto (id_producto)
+);
+
+create table clases(
+	id_clase int NOT NULL AUTO_INCREMENT,
+    nombreClase varchar(60) NOT NULL,
+    id_entrenador int NOT NULL,
+    CONSTRAINT pk_clases PRIMARY KEY (id_clase),
+	CONSTRAINT fk_entrenador FOREIGN KEY (id_entrenador) REFERENCES entrenador (id_entrenador)
+);
+
+create table miembro_clases(
+	id_miembro_clases int NOT NULL AUTO_INCREMENT,
+    id_miembro int,
+    id_clases int,
+    CONSTRAINT pk_miembro_clases PRIMARY KEY (id_miembro_clases),
+	CONSTRAINT fk_miembro FOREIGN KEY (id_miembro)
+    REFERENCES miembro2 (id_miembro),
+    CONSTRAINT fk_clases2 FOREIGN KEY (id_clases) REFERENCES
+    clases (id_clases)
+)
+
