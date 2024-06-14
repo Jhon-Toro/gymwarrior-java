@@ -56,21 +56,12 @@ create table compra(
 );
 
 create table clases(
-	id_clase int NOT NULL AUTO_INCREMENT,
+    id_clase int NOT NULL AUTO_INCREMENT,
     nombreClase varchar(60) NOT NULL,
     id_entrenador int NOT NULL,
+   id_miembro int NOT NULL,
     CONSTRAINT pk_clases PRIMARY KEY (id_clase),
-	CONSTRAINT fk_entrenador FOREIGN KEY (id_entrenador) REFERENCES entrenador (id_entrenador)
+    CONSTRAINT fk_entrenador2 FOREIGN KEY (id_entrenador) REFERENCES entrenador (id_entrenador)
+    CONSTRAINT fk_miembro2 FOREIGN KEY (id_miembro) REFERENCES miembro (id_miembro)
 );
-
-create table miembro_clases(
-	id_miembro_clases int NOT NULL AUTO_INCREMENT,
-    id_miembro int,
-    id_clases int,
-    CONSTRAINT pk_miembro_clases PRIMARY KEY (id_miembro_clases),
-	CONSTRAINT fk_miembro FOREIGN KEY (id_miembro)
-    REFERENCES miembro2 (id_miembro),
-    CONSTRAINT fk_clases2 FOREIGN KEY (id_clases) REFERENCES
-    clases (id_clases)
-)
 
